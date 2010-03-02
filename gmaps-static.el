@@ -9,8 +9,16 @@
 ;; 
 
 ;;; Code:
+
+(defgroup gmaps-static nil
+  "Map viewer based on Google Static Maps API."
+  :prefix "gmaps-static-"
+  :group 'applications)
+
 (defcustom gmaps-static-zoom-level 13
-  "Map zoom level.")
+  "Map zoom level."
+  :type 'integer
+  :group 'gmaps-static)
 
 (defvar gmaps-static-api-url-scheme "http://maps.google.com/maps/api/staticmap?zoom=%s&markers=size:small|color:black|%s|%s&size=500x300&sensor=false"
   "Google Static Maps API URI scheme.")
