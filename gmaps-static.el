@@ -2,7 +2,9 @@
 
 ;;; Commentary:
 ;;
-;; Usage: M-x gmaps-static-show-address
+;; Usage:
+;;   M-x gmaps-static-show-address
+;;   You can zoom the map using the mouse wheels and keys '+' and '-'.
 ;;
 
 ;;; History:
