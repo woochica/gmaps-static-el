@@ -53,8 +53,16 @@ Argument ZOOM-LEVEL defaults to `gmaps-static-zoom-level'."
   "Callback function for `url-retrieve'."
   (let* ((handle (mm-dissect-buffer t))
          (zoom-level (nth 1 data))
-         (address (nth 2 data)))
+         (address (nth 2 data))
+         (previous-buffer (get-buffer address)))
     (url-mark-buffer-as-dead (current-buffer))
+    ;; It would be smart to reuse the already created buffer. The only buffer
+    ;; that I could not figure out how to delete the MIME content part from it
+    ;; before displaying the new image. Since then, we simply delete the
+    ;; previous buffer and create a new one.
+    (if previous-buffer
+        (kill-buffer previous-buffer))
+
     (with-current-buffer
         (generate-new-buffer address)
       (gmaps-static-mode)
@@ -67,9 +75,9 @@ Argument ZOOM-LEVEL defaults to `gmaps-static-zoom-level'."
 
       (switch-to-buffer (current-buffer))
       (add-hook 'kill-buffer-hook
-                    `(lambda () (mm-destroy-parts ',handle))
-                    nil
-                    t))))
+                `(lambda () (mm-destroy-parts ',handle))
+                nil
+                t))))
 
 (defun gmaps-static-zoom-in ()
   "Zoom in the map one level."
