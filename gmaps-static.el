@@ -11,6 +11,8 @@
 ;; 
 
 ;;; Code:
+(require 'mm-decode)
+(require 'mm-view)
 
 (defgroup gmaps-static nil
   "Map viewer based on Google Static Maps API."
